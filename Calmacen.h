@@ -12,8 +12,8 @@ class Calmacen {
     valor col;
     valor fil;
     vector<vector<texto>> slots;
-    vector<Crobot*&>v;
-    vector<Cproducto*&> n;
+    vector<Crobot*>v;
+    //vector<Cproducto&> n;
 public:
     Calmacen(valor c,valor f);
     void imprimir_almacen_vacio();
@@ -21,11 +21,11 @@ public:
     void agregar_productos(Cproducto P);
     valor get_col(){return col;}
     valor get_fil(){return fil;}
-    void agregar_robot(Crobot rt);
+    void agregar_robot(Crobot* rt);
     virtual ~Calmacen()=default;
     void imprimir_almacen();
-    void rellenar_vector_robots(Crobot*& R);
-    void rellenar_vector_productos(Cproducto*& P);
+    void rellenar_vector_robots(Crobot* R);
+    //void rellenar_vector_productos(Cproducto*& P);
     void usar_robot();
 };
 

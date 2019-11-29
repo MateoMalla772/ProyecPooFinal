@@ -30,59 +30,68 @@ void Calmacen::imprimir_almacen() {
         cout<<endl;}
 }
 
-void Calmacen::agregar_robot(Crobot rt) {
-    slots[rt.get_x()][rt.get_y()] = rt.get_nombre();
+void Calmacen::agregar_robot(Crobot *rt) {
+    slots[rt->get_x()][rt->get_y()] = rt->get_nombre();
 }
 
-void Calmacen::rellenar_vector_robots(Crobot*& R){
+void Calmacen::rellenar_vector_robots(Crobot* R){
     v.push_back(R);
 }
 
 void Calmacen::usar_robot() {
     texto a=" ";
     cout<<"Indique el nombre del robot (Ex-->R1):";cin>>a;
-    for (cantidad i=0;i<v.size();i++){
-        if (v[i]->get_nombre()==a){
-            cout<<"Robot existente";
-            posicion x=0, y=0;
-            x=v[i]->get_x();
-            y=v[i]->get_y();
-            posicion u=0; posicion o=0;
-            cout<<"Indique la posicion a x";cin>>u;
-            cout<<"Indique la posicion a y";cin>>o;
-            for(cantidad f=0; f<1000; f++){
-                for (cantidad p=0;p<1000;p++){
-                    if (y<o){
-                        y+=1;
-                        v[i]->set_y(y);//imprimir almacen;
-                    }
-                    if (y>o){
-                        y-=1;
-                        v[i]->set_y(y);//imprimir almacen;
-                    }
-                    if(y==o) break;
-                }
-                if (x<u){
-                    x+=1;
-                    v[i]->set_x(x);
-                }
-                if (x>u){
-                    x-=1;
-                    v[i]->set_x(x);
-                if(x==u) break;
-              //imprimir almacen;
-            }
-        }}
-        else{
-            cout<<"Indique un robot existente:";cin>>a;
+    posicion x=0,y=0;
+    posicion robottt=0;
+    posicion u=0,o=0;
+    cout<<"hola";
+    for (cantidad i=0;i<v.size();i++) {
+        if ((v[i]->get_nombre() )== a) {
+            cout << "Robot existente"<<endl;
+            x = v[i]->get_x();
+            y = v[i]->get_y();
+            cout << "Indique la posicion a x:";
+            cin >> u;
+            cout << "Indique la posicion a y:";
+            cin >> o;
+            robottt=i;
         }
-
     }
+    cout<<"Hola";
+    vector<vector<posicion>>posicionesxy;
+    //x
+    int i=0;
+    if(y!=o){
+        do{
+            posicionesxy[i].push_back(x);
+            posicionesxy[i].push_back(y);
+            y++;
+            i++;
+        }while(x!=u);
+    }
+    if(x!=u){
+        do{
+            posicionesxy[i].push_back(x);
+            posicionesxy[i].push_back(y);
+            x++;
+            i++;
+        }while(x!=u);
+    }
+    for(int i=0; i<posicionesxy.size();i++){
+        v[robottt]->set_x(posicionesxy[i][0]);
+        v[robottt]->set_y(posicionesxy[i][1]);
+        for (auto& row:slots){
+            for (auto& item:row){cout<<setw(8)<<item;}
+            cout<<endl;}
+    }
+
 }
 
-void Calmacen::rellenar_vector_productos(Cproducto *& P) {
+
+
+/*void Calmacen::rellenar_vector_productos(Cproducto *& P) {
     n.push_back(P);
-}
+}*/
 
 Calmacen crear_almacen(istream& in){
     valor c1=0;
@@ -115,11 +124,12 @@ void indicar_robots(Calmacen& A1,istream& in){
     cantidad n=A1.get_fil();t_posicion x=0;t_posicion y=0;texto nom;
     for (cantidad i = 0; i < n; i++) {
         cout<<"Indique el nombre del robot:";in>>nom;
-        Crobot rt(nom, x, y);
+        Crobot *rt=new Crobot(nom, x, y);
         auto *ptrR=&rt;
-        A1.rellenar_vector_robots(*&ptrR);
+        A1.rellenar_vector_robots(rt);
         A1.agregar_robot(rt);
         x=x+1;
+
     }
 }
 
