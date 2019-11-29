@@ -26,7 +26,7 @@ public:
     void imprimir_almacen();
     void rellenar_vector_robots(Crobot* R);
     //void rellenar_vector_productos(Cproducto*& P);
-    void usar_robot();
+    void usar_robot(istream& in);
 };
 
 Calmacen crear_almacen(istream& in);

@@ -9,6 +9,6 @@ int main() {
     A1.imprimir_almacen();
     indicar_robots(A1,cin);
     A1.imprimir_almacen();
-    A1.usar_robot();
+    A1.usar_robot(cin);
     return 0;
 }

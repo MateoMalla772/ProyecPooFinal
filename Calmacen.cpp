@@ -38,9 +38,9 @@ void Calmacen::rellenar_vector_robots(Crobot* R){
     v.push_back(R);
 }
 
-void Calmacen::usar_robot() {
+void Calmacen::usar_robot(istream& in) {
     texto a=" ";
-    cout<<"Indique el nombre del robot (Ex-->R1):";cin>>a;
+    cout<<"Indique el nombre del robot (Ex-->R1):";in>>a;
     posicion x=0,y=0;
     posicion robottt=0;
     posicion u=0,o=0;
@@ -50,14 +50,13 @@ void Calmacen::usar_robot() {
             x = v[i]->get_x();
             y = v[i]->get_y();
             cout << "Indique la posicion a x:";
-            cin >> u;
+            in >> u;
             cout << "Indique la posicion a y:";
-            cin >> o;
+            in >> o;
             robottt=i;
         }
     }
     vector<vector<posicion>>posicionesxy;
-    //x
     int i=0;
     if(y!=o){
         do{
