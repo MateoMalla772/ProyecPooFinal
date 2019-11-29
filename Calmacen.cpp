@@ -44,7 +44,6 @@ void Calmacen::usar_robot() {
     posicion x=0,y=0;
     posicion robottt=0;
     posicion u=0,o=0;
-    cout<<"hola";
     for (cantidad i=0;i<v.size();i++) {
         if ((v[i]->get_nombre() )== a) {
             cout << "Robot existente"<<endl;
@@ -57,32 +56,34 @@ void Calmacen::usar_robot() {
             robottt=i;
         }
     }
-    cout<<"Hola";
     vector<vector<posicion>>posicionesxy;
     //x
     int i=0;
     if(y!=o){
         do{
-            posicionesxy[i].push_back(x);
-            posicionesxy[i].push_back(y);
+            vector<posicion> momentaneo = {x,y};
+            posicionesxy.push_back(momentaneo);
             y++;
             i++;
-        }while(x!=u);
+        }while(y!=o);
     }
     if(x!=u){
         do{
-            posicionesxy[i].push_back(x);
-            posicionesxy[i].push_back(y);
+            vector<posicion> momentaneo = {x,y};
+            posicionesxy.push_back(momentaneo);
             x++;
             i++;
         }while(x!=u);
     }
     for(int i=0; i<posicionesxy.size();i++){
+        slots[v[robottt]->get_x()][v[robottt]->get_y()]="*";
         v[robottt]->set_x(posicionesxy[i][0]);
         v[robottt]->set_y(posicionesxy[i][1]);
+        slots[v[robottt]->get_x()][v[robottt]->get_y()]=v[robottt]->get_nombre();
         for (auto& row:slots){
             for (auto& item:row){cout<<setw(8)<<item;}
             cout<<endl;}
+        cout<<endl;
     }
 
 }
